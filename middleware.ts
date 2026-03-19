@@ -40,7 +40,7 @@ export async function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname
 
-  if (path === '/' || path.startsWith('/login') || path.startsWith('/register') || path.startsWith('/forgot-password')) {
+  if (path === '/' || path.startsWith('/auth/login') || path.startsWith('/auth/register') || path.startsWith('/auth/forgot-password')) {
     if (user) {
       const { data: profile } = await supabase
         .from('profiles')
@@ -59,7 +59,7 @@ export async function middleware(request: NextRequest) {
 
   if (!user) {
     if (path.startsWith('/admin') || path.startsWith('/rep')) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      // return NextResponse.redirect(new URL('/auth/login', request.url))
     }
     return supabaseResponse
   }
@@ -79,7 +79,7 @@ export async function middleware(request: NextRequest) {
       
     if (org?.status !== 'approved') {
       await supabase.auth.signOut()
-      return NextResponse.redirect(new URL('/login?error=pending_approval', request.url))
+      return NextResponse.redirect(new URL('/auth/login?error=pending_approval', request.url))
     }
   }
 

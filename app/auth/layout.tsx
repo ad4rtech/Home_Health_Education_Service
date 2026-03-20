@@ -3,8 +3,7 @@ import { usePathname } from 'next/navigation'
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  
-  if (pathname === '/auth/register' || pathname === '/auth/login') {
+  if (pathname === '/auth/register' || pathname === '/auth/login' || pathname === '/auth/admin') {
     return <>{children}</>
   }
   

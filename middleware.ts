@@ -40,7 +40,7 @@ export async function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname
 
-  if (path === '/' || path.startsWith('/auth/login') || path.startsWith('/auth/register') || path.startsWith('/auth/forgot-password')) {
+  if (path === '/' || path.startsWith('/auth/login') || path.startsWith('/auth/register') || path.startsWith('/auth/forgot-password') || path.startsWith('/auth/admin')) {
     if (user) {
       const { data: profile } = await supabase
         .from('profiles')
